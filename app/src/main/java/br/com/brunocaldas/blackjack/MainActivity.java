@@ -1,6 +1,7 @@
 package br.com.brunocaldas.blackjack;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         binding();
         btnBaralho.setEnabled(false);
@@ -62,10 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (doublePressCheat) {
-                    finish();
-                    Intent i = new Intent(getApplicationContext(),VitoriaActivity.class);
-                    startActivity(i);
-                    return;
+                    exibirTelaVitoria();
                 }
                 doublePressCheat = true;
                 new Handler().postDelayed(new Runnable() {
@@ -175,11 +176,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (soma == 21 || somaAux == 21) {
-            exibirMsg("Ganhou!!!!");
             btnBaralho.setEnabled(false);
-            finish();
-            Intent i = new Intent(getApplicationContext(),VitoriaActivity.class);
-            startActivity(i);
+            exibirTelaVitoria();
 
         } else if (soma > 21) {
             exibirMsg("Errroooouuuuu!!!");
@@ -189,6 +187,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void exibirMsg(String msg) {
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+    }
+
+    private void exibirTelaVitoria() {
+        finish();
+        Intent i = new Intent(getApplicationContext(),VitoriaActivity.class);
+        startActivity(i);
     }
 
     private void calculaProbabilidade(){

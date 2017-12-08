@@ -3,6 +3,7 @@ package br.com.brunocaldas.blackjack;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class VitoriaActivity extends AppCompatActivity {
 
@@ -22,17 +24,16 @@ public class VitoriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vitoria);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        binding();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        Glide.with(this)
-                .load(R.drawable.vitoria)
-                .asGif()
-                .into((ImageView)findViewById(R.id.foguinhos));
+        binding();
 
         mPlayer.start();
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        Glide.with(VitoriaActivity.this)
+                .load(R.drawable.vitoria)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into((ImageView)findViewById(R.id.foguinhos));
 
         Toast.makeText(getApplicationContext(),"Ganhhooouuuuu!!!",Toast.LENGTH_SHORT).show();
 
