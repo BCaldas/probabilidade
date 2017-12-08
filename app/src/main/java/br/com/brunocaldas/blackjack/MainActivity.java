@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             exibirTelaVitoria();
 
         } else if (soma > 21) {
-            exibirMsg("Errroooouuuuu!!!");
+            exibirTelaDerrota();
             btnBaralho.setEnabled(false);
         }
     }
@@ -192,6 +192,12 @@ public class MainActivity extends AppCompatActivity {
     private void exibirTelaVitoria() {
         finish();
         Intent i = new Intent(getApplicationContext(),VitoriaActivity.class);
+        startActivity(i);
+    }
+
+    private void exibirTelaDerrota() {
+        finish();
+        Intent i = new Intent(getApplicationContext(),DerrotaActivity.class);
         startActivity(i);
     }
 
