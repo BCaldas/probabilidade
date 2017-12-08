@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         binding();
@@ -160,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                             android.R.id.text2});
 
             cartasNaMao.setAdapter(adapter);
+
+            cartasNaMao.setSelection(adapter.getCount() - 1);
         }
 
     }
@@ -190,15 +191,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void exibirTelaVitoria() {
-        finish();
-        Intent i = new Intent(getApplicationContext(),VitoriaActivity.class);
-        startActivity(i);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+                Intent i = new Intent(getApplicationContext(),VitoriaActivity.class);
+                startActivity(i);
+            }
+        }, 500);
     }
 
     private void exibirTelaDerrota() {
-        finish();
-        Intent i = new Intent(getApplicationContext(),DerrotaActivity.class);
-        startActivity(i);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+                Intent i = new Intent(getApplicationContext(),DerrotaActivity.class);
+                startActivity(i);
+            }
+        }, 500);
+
     }
 
     private void calculaProbabilidade(){
