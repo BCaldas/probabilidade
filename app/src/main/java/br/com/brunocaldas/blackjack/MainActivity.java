@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         doublePressCheat=false;
                     }
-                }, 2000);
+                }, 1000);
             }
         });
     }

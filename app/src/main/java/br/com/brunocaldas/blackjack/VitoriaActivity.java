@@ -16,9 +16,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class VitoriaActivity extends AppCompatActivity {
 
-    ImageView foguinhos;
+    ImageView foguinhos, parabens;
     Button btnVoltar;
     MediaPlayer mPlayer;
+    MediaPlayer aplausos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +30,25 @@ public class VitoriaActivity extends AppCompatActivity {
         binding();
 
         mPlayer.start();
+        aplausos.start();
 
         Glide.with(VitoriaActivity.this)
                 .load(R.drawable.vitoria)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into((ImageView)findViewById(R.id.foguinhos));
+                .into(foguinhos);
 
-        Toast.makeText(getApplicationContext(),"Ganhhooouuuuu!!!",Toast.LENGTH_SHORT).show();
+        Glide.with(VitoriaActivity.this)
+                .load(R.drawable.parabens)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(parabens);
+
+        Toast.makeText(getApplicationContext(),"Ganhhooouuuuu!!!",Toast.LENGTH_LONG).show();
 
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPlayer.stop();
+                aplausos.stop();
                 finish();
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
@@ -52,6 +60,8 @@ public class VitoriaActivity extends AppCompatActivity {
     private void binding() {
         foguinhos = (ImageView) findViewById(R.id.foguinhos);
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
+        parabens = (ImageView) findViewById(R.id.parabens);
         mPlayer = MediaPlayer.create(VitoriaActivity.this, R.raw.fogos);
+        aplausos = MediaPlayer.create(VitoriaActivity.this, R.raw.aplausos);
     }
 }
